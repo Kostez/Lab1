@@ -2,12 +2,14 @@
 
 int main(int argc, char *argv[]) {
   
+  const char* modes[] = {"std", "child", "posix", "kill", "pipe"};
+  
   const struct option long_options[] = {
-        {"opta",no_argument,&flag_a,1},
-        {"optb",no_argument,&flag_b,10},
-        {"optc",no_argument,&flag_c,-121},
-        {NULL,0,NULL,0}
-    };
+		{"help",no_argument,NULL,'h'},
+		{"size",optional_argument,NULL,'s'},
+		{"file",required_argument,NULL,'f'},
+		{NULL,0,NULL,0}
+	};
   
   
   
