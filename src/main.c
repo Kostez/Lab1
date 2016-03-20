@@ -1,5 +1,22 @@
 #include <getopt.h>
 
+struct params {
+	modes_lab1 mode;
+	int amount;
+	int signalname;
+	
+	
+	
+} params_lab1;
+
+enum modes {
+	std = 0,
+	child,
+	posix,
+	kill,
+	pipe
+} modes_lab1;
+
 int main(int argc, char *argv[]) {
 	
 	const char* short_options = "m:a::s::p::";
@@ -19,13 +36,7 @@ int main(int argc, char *argv[]) {
 		long_options,&option_index))!=-1){
 			switch(rez){
 			case 'm': {
-				printf("This is demo help. Try -h or --help.\n");
-				printf("option_index = %d (\"%s\",%d,%c)\n",
-					option_index,
-					long_options[option_index].name,
-					long_options[option_index].has_arg,
-					long_options[option_index].val
-				);
+				
 				break;
 			};
 			case 'a': {
