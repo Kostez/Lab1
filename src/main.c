@@ -4,9 +4,7 @@ struct params {
 	modes_lab1 mode;
 	int amount;
 	int signalname;
-	
-	
-	
+	int pid;
 } params_lab1;
 
 enum modes {
