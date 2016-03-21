@@ -1,12 +1,5 @@
 #include <getopt.h>
 
-struct params_s {
-	modes_s mode;
-	int amount;
-	int signalname;
-	int pid;
-};
-
 enum modes_s {
 	std = 0,
 	child,
@@ -14,6 +7,15 @@ enum modes_s {
 	kill,
 	pipe
 };
+
+struct params_s {
+	modes_s mode;
+	int amount;
+	int signalname;
+	int pid;
+};
+
+
 
 int main(int argc, char *argv[]) {
 	
