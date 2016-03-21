@@ -36,22 +36,27 @@ int main(int argc, char *argv[]) {
 		long_options,&option_index))!=-1){
 			switch(rez){
 			case 'm': {
+				printf("Case m \n");
 				for(int i = 0; i < 4; i++) {
 					if(strcmp(modes[i], optarg) == 0) {
-						par.mode = 1;
+						par.mode = i;
+						break;
 					}
 				}
 				break;
 			};
 			case 'a': {
+				printf("Case a \n");
 				par.amount = atoi(optarg);
 				break;
 			};
 			case 's': {
+				printf("Case s \n");
 				par.signalname = atoi(optarg);
 				break;
 			};
 			case 'p': {
+				printf("Case p \n");
 				par.pid = atoi(optarg);
 				break;
 			};
