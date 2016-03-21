@@ -36,8 +36,10 @@ int main(int argc, char *argv[]) {
 		long_options,&option_index))!=-1){
 			switch(rez){
 			case 'm': {
-				if(strcmp() == 0) {
-					
+				for(int i = 0; i < 4; i++) {
+					if(strcmp(modes[i], optarg) == 0) {
+						par.mode = 1;
+					}
 				}
 				break;
 			};
