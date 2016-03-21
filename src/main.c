@@ -1,6 +1,7 @@
+#include <stdio.h>
 #include <getopt.h>
 
-enum modes_s {
+enum Modes_e {
 	std = 0,
 	child,
 	posix,
@@ -8,18 +9,16 @@ enum modes_s {
 	pipe
 };
 
-struct params_s {
-	modes_s mode;
+struct Params_s {
+	enum Modes_s mode;
 	int amount;
 	int signalname;
 	int pid;
 };
 
-
-
 int main(int argc, char *argv[]) {
 	
-	struct params_s par;
+	struct Params_s param;
 	
 	const char* short_options = "m:a::s::p::";
 	const char* modes[] = {"std", "child", "posix", "kill", "pipe"};
@@ -41,7 +40,7 @@ int main(int argc, char *argv[]) {
 				printf("Case m \n");
 				for(int i = 0; i < 4; i++) {
 					if(strcmp(modes[i], optarg) == 0) {
-						par.mode = i;
+						param.mode = i;
 						break;
 					}
 				}
@@ -49,17 +48,17 @@ int main(int argc, char *argv[]) {
 			};
 			case 'a': {
 				printf("Case a \n");
-				par.amount = atoi(optarg);
+				param.amount = atoi(optarg);
 				break;
 			};
 			case 's': {
 				printf("Case s \n");
-				par.signalname = atoi(optarg);
+				param.signalname = atoi(optarg);
 				break;
 			};
 			case 'p': {
 				printf("Case p \n");
-				par.pid = atoi(optarg);
+				param.pid = atoi(optarg);
 				break;
 			};
 	}
