@@ -1,13 +1,13 @@
 #include <getopt.h>
 
 struct params_s {
-	modes_lab1 mode;
+	modes_s mode;
 	int amount;
 	int signalname;
 	int pid;
 };
 
-enum modes_e {
+enum modes_s {
 	std = 0,
 	child,
 	posix,
