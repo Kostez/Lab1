@@ -1,21 +1,23 @@
 #include <getopt.h>
 
-struct params {
+struct params_s {
 	modes_lab1 mode;
 	int amount;
 	int signalname;
 	int pid;
-} params_lab1;
+};
 
-enum modes {
+enum modes_e {
 	std = 0,
 	child,
 	posix,
 	kill,
 	pipe
-} modes_lab1;
+};
 
 int main(int argc, char *argv[]) {
+	
+	struct params_s par;
 	
 	const char* short_options = "m:a::s::p::";
 	const char* modes[] = {"std", "child", "posix", "kill", "pipe"};
@@ -34,20 +36,22 @@ int main(int argc, char *argv[]) {
 		long_options,&option_index))!=-1){
 			switch(rez){
 			case 'm': {
-				
+				if(strcmp() == 0) {
+					
+				}
 				break;
 			};
 			case 'a': {
-				
+				par.amount = atoi(optarg);
 				break;
 			};
 			case 's': {
-				
+				par.signalname = atoi(optarg);
 				break;
 			};
 			case 'p': {
-				
+				par.pid = atoi(optarg);
 				break;
 			};
-		}
+	}
 }
