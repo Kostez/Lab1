@@ -23,17 +23,28 @@ void mode_child(){
         int randomtime = 0;
         child_s.sa_sigaction = handler_child_mode;
         child_s.sa_flags = SA_SIGINFO;
-	pid_t child_pid = fork();
+	pid_t child_pid;
 	
-	if(0 == child_pid) {
-		srand(time(0));
-		randomtime = 1+rand()%5;
-		printf("CHILD, Sleep for %d", randomtime);
-		sleep(randomtime);
-	} else if(0 < child_pid) {
-		if(sigaction(SIGCHLD, &child_s, 0) == -1) {
-			perror(NULL);
-			exit(1);
-		}
-	}
+	switch(child_pid = fork()) {
+  		case -1:
+        	 	perror("fork"); /* произошла ошибка */
+        	 	exit(1); /*выход из родительского процесса*/
+  		case 0:
+        		printf(" CHILD: Это процесс-потомок!\n");
+          		printf(" CHILD: Мой PID -- %d\n", getpid());
+          		printf(" CHILD: PID моего родителя -- %d\n", getppid());
+          		srand(time(0));
+			randomtime = 1+rand()%5;
+			printf("CHILD, Sleep for %d", randomtime);
+			sleep(randomtime);	
+          		printf(" CHILD: Выход!\n");
+  		default:
+          		printf("PARENT: Это процесс-родитель!\n");
+        		printf("PARENT: Мой PID -- %d\n", getpid());
+          		printf("PARENT: PID моего потомка %d\n",pid);
+          		sigaction(SIGCHLD, &child_s, 0);
+          		printf("PARENT: Я жду, пока потомок не вызовет exit()...\n");
+        		wait();
+          		printf("PARENT: Выход!\n");
+  	}
 }
