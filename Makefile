@@ -5,7 +5,7 @@ OUT=./bin
 $(OUT)/lab: $(OUT)/main.o
 	gcc -o $(OUT)/lab $(OUT)/main.o
 
-$(OUT)/main.o: $(SRC)/main.c $(INC)general.h
+$(OUT)/main.o: $(SRC)/main.c $(INC)/general.h
 	gcc -I$(INC) -o $(OUT)/main.o -c $(SRC)/main.c
 
 clean:
