@@ -80,6 +80,7 @@ int main(int argc, char** argv) {
             };
             default:
                 fprintf(stderr, "Unknown param\n");
+                exit(0);
                 break;
         }
     }
@@ -91,7 +92,7 @@ int main(int argc, char** argv) {
     while(1) {
         sleep(1);
     }
-    return EXIT_SUCCESS;
+    return 0;
 }
 
 
@@ -106,15 +107,15 @@ void mode_std(){
         std_s.sa_flags = SA_SIGINFO;
         if(sigaction(SIGUSR1, &std_s, 0 == -1)){
                 perror(NULL);
-                exit(EXIT_FAILURE);
+                exit(1);
         }
         if(sigaction(SIGUSR2, &std_s, 0) == -1){
                 perror(NULL);
-                exit(EXIT_FAILURE);
+                exit(1);
         }
         if(sigaction(SIGHUP, &std_s, 0) == -1){
                 perror(NULL);
-                exit(EXIT_FAILURE);
+                exit(1);
         }
 }
 
@@ -137,36 +138,36 @@ void mode_pipe(){
 void worksignalss(){
     switch(params.modes_e){
         case 0:
-            printf("case0");
+            printf("case0\n");
             mode_std();
             break;
         case 1:
-            printf("case1");
+            printf("case1\n");
             mode_child();
             break;
         case 2:
-            printf("case2");
+            printf("case2\n");
             if(0 < params.amount)
                 mode_posix(params.amount);
             else{
-                printf("Quontity of signal must be more 0 \n");
-                exit(EXIT_FAILURE);
+                printf("Quontity of signal must be more 0\n");
+                exit(1);
             }
             break;
         case 3:
             printf("case3");
             if(0 == params.signalname){
                 fprintf(stderr, "Signal is not set\n");
-                exit(EXIT_FAILURE);
+                exit(1);
             }
             if(0 == params.pid){
                 fprintf(stderr, "Process ID is not set\n");
-                exit(EXIT_FAILURE);
+                exit(1);
             }
             mode_kill(params.signalname, params.pid);
             break;
         case 4:
-            printf("case4");
+            printf("case4\n");
             mode_pipe();
             break;
     }
