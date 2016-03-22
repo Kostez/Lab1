@@ -1,11 +1,11 @@
 # Lab1
 How to build:
 
-  make
+    make
   
 How to clearn:
 
-  make clearn
+    make clearn
   
 How to run in modes:
 
