@@ -24,11 +24,17 @@ void mode_child(){
         child_s.sa_sigaction = handler_child_mode;
         child_s.sa_flags = SA_SIGINFO;
 	pid_t child_pid;
+
+	if(sigaction(SIGCHLD, &child_s, 0)==-1) 	{
+		perror(NULL);
+		exit(EXIT_FAILURE);
+	}
 	
 	switch(child_pid = fork()) {
   		case -1:
         	 	perror("fork"); /* произошла ошибка */
         	 	exit(1); /*выход из родительского процесса*/
+        	 	break;
   		case 0:
         		printf(" CHILD: Это процесс-потомок!\n");
           		printf(" CHILD: Мой PID -- %d\n", getpid());
@@ -38,13 +44,13 @@ void mode_child(){
 			printf("CHILD, Sleep for %d", randomtime);
 			sleep(randomtime);
           		printf(" CHILD: Проснулся!\n");
+          		exit(1);
   		default:
           		printf("PARENT: Это процесс-родитель!\n");
         		printf("PARENT: Мой PID -- %d\n", getpid());
           		printf("PARENT: PID моего потомка %d\n",child_pid);
-          		sigaction(SIGCHLD, &child_s, 0);
           		printf("PARENT: Я жду, пока потомок не вызовет exit()...\n");
-        		//wait();
           		printf("PARENT: Выход!\n");
+          		break;
   	}
 }
