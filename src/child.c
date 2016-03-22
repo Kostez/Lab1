@@ -1,7 +1,11 @@
 #include <general.h>
 
 void handler_child_mode(int signum, siginfo_t *info, void *f){
-        fprintf(stderr, "\nNumber of signal is %d\nPID of process is %d\nGID of process is %d\n\n", signum, info->si_pid, getpgid(info->si_pid));
+        printf("\nНомер сигнала: %d\n", info->si_signo);
+        printf("Значение errno: %d\n", info->si_errno);
+        printf("Значение errno: %d\n", info->si_errno);
+        printf("Значение errno: %d\n", info->si_errno);
+        printf("Значение errno: %d\n", info->si_errno);
         return;
 }
 
