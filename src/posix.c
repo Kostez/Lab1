@@ -10,9 +10,19 @@ void handler_posix_mode(int signum, siginfo_t *info, void *f){
 }
 
 void mode_posix(int amount){
-        struct sigaction posix_s;
-        posix_s.sa_sigaction = handler_posix_mode;
-        posix_s.sa_flags = SA_SIGINFO;
+    struct sigaction posix_s;
+    posix_s.sa_sigaction = handler_posix_mode;
+    posix_s.sa_flags = SA_SIGINFO;
         
-        
+    int i = 0
+    for (; i < SIGRTMAX; i++) {
+	    sigaction(SIGRTMIN + i, &posix_s, NULL);
+    }
+	
+	pid_t pid = fork();
+	
+	if (pid == 0) {
+	        
+	}
+	
 }
