@@ -13,12 +13,12 @@ void mode_posix(int amount){
 	posix_s.sa_sigaction = handler_posix_mode;
 	posix_s.sa_flags = SA_SIGINFO;
 	
-	int i = SIGRTMIN
+	int i = SIGRTMIN;
 	for (; i < SIGRTMAX; i++) {
-    	if(sigaction(i, &posix_s, NULL) == -1) {
-    		perror(NULL);
+    		if(sigaction(i, &posix_s, NULL) == -1) {
+    			perror(NULL);
 			exit(0);
-    	}
+    		}
 	}
 	
 	pid_t pid;
