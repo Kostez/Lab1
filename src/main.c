@@ -67,10 +67,6 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void mode_child(){
-
-}
-
 void mode_posix(int amount){
 
 }
