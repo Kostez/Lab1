@@ -56,8 +56,6 @@ int main(int argc, char** argv) {
                 int i = 0;
                 for(; i < 5; i++) {
                     if(strcmp(optarg,modes[i]) == 0) {
-                for(; i < 5; i++) {
-                    if(strcmp(optarg,modes[i]) == 0) {
                         params.modes_e = i;
                         break;
                     }
@@ -107,13 +105,10 @@ void handler_std_mode(int signum, siginfo_t *info, void *f){
         return;
 }
 
-
 void mode_std(){
         struct sigaction std_s;
         std_s.sa_sigaction = handler_std_mode;
         std_s.sa_flags = SA_SIGINFO;
-        if(sigaction(SIGUSR1, &std_s, 0 == -1)){
-                perror(NULL);
         if(sigaction(SIGUSR1, &std_s, 0 == -1)){
                 perror(NULL);
                 exit(EXIT_FAILURE);
@@ -171,8 +166,6 @@ void worksignalss(){
             }
             if(0 == params.pid){
                 fprintf(stderr, "Process ID is not set\n");
-                exit(EXIT_FAILURE);
-               fprintf(stderr, "Process ID is not set\n");
                 exit(EXIT_FAILURE);
             }
             mode_kill(params.signalname, params.pid);
