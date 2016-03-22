@@ -30,7 +30,9 @@ void mode_child(){
 	pid_t child_pid = fork();
 	if(0 == child_pid) {
 		srand(time(0));
-		printf("CHILD, Sleep for %d", sleep(rand()%5+1);
+		randomtime = rand()%5+1;
+		printf("CHILD, Sleep for %d", randomtime);
+		sleep(randomtime);
 	} else if(0 > child_pid) {
 		perror(NULL);
 		exit(1);
