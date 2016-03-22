@@ -23,7 +23,7 @@ void mode_child(){
         int randomtime = 0;
         child_s.sa_sigaction = handler_child_mode;
         child_s.sa_flags = SA_SIGINFO;
-        if(sigaction(SIGCHLD, &std_s, 0) == -1) {
+        if(sigaction(SIGCHLD, &child_s, 0) == -1) {
 		perror(NULL);
 		exit(1);
 	}
