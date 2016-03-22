@@ -42,8 +42,7 @@ void mode_child(){
 			printf("CHILD, Sleep for %d", randomtime);
 			sleep(randomtime);
           		printf(" CHILD: Проснулся!\n");
-          		break;
-          		//exit(1);
+          		exit(0);
           		
   		default:
           		printf("PARENT: Это процесс-родитель!\n");
