@@ -35,6 +35,5 @@ void mode_child(){
 			perror(NULL);
 			exit(1);
 		}
-		perror(NULL);
 	}
 }
