@@ -22,8 +22,16 @@ void mode_posix(int amount){
     	}
 	}
 	
-	pid_t pid = fork();
+	pid_t pid;
 	
+	switch(pid = fork()){
+		case -1:
+			break;
+		case 0:
+			break;
+		default:
+			break;
+	}
 	if (pid == 0) {
 		int j = 0;
 		for(;j<amount;j++) {
