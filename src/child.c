@@ -39,7 +39,7 @@ void mode_child(){
         		printf(" CHILD: Это процесс-потомок!\n");
           		srand(time(0));
 			randomtime = 1+rand()%5;
-			printf("CHILD, Sleep for %d", randomtime);
+			printf(" CHILD: Sleep for %d", randomtime);
 			sleep(randomtime);
           		printf(" CHILD: Проснулся!\n");
           		exit(0);
