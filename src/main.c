@@ -101,7 +101,7 @@ int main(int argc, char** argv) {
 
 
 void handler_std_mode(int signum, siginfo_t *info, void *f){
-        fprintf(stderr, "\nNumber of signal is %d\nPID of process is %d\nGID of process is %d\n\n", signum, info->si$
+        fprintf(stderr, "\nNumber of signal is %d\nPID of process is %d\nGID of process is %d\n\n", signum, info->si_pid, getpgid(info->si_pid));
         return;
 }
 
