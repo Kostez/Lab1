@@ -4,18 +4,19 @@
 #include <signal.h>
 #include <unistd.h>
 #include <getopt.h>
-#include <sys/signal.h>
 
 /*
  * 
  */
-void sign_handler(int signo, siginfo_t *siginf, void *ptr){
+
+
+void worksignalss(void);
     
-    
-}
-
-
-
+void mode_std(void);
+void mode_child(void);
+void mode_posix(int amount);
+void mode_kill(int signo, int validkillpid);
+void mode_pipe(void);
 
 enum Modes {
 	modes_std = 0,
@@ -84,17 +85,41 @@ int main(int argc, char** argv) {
 		break;
             };
             default:
-                printf(stderr, "Unknown param\n");
+                fprintf(stderr, "Unknown param\n");
                 break;
 	}
     }
     
-    worksignals();
+    worksignalss();
     
-    return 0;
+    return EXIT_SUCCESS;
 }
 
-void worksignals(){
+
+
+
+
+void mode_std(){
+    
+}
+
+void mode_child(){
+    
+}
+
+void mode_posix(int amount){
+    
+}
+
+void mode_kill(int signo, int validkillpid){
+    
+}
+
+void mode_pipe(){
+    
+}
+
+void worksignalss(){
     switch(params.modes_e){
         case 0:
             printf("case0");
@@ -109,7 +134,7 @@ void worksignals(){
             if(0 < params.amount)
                 mode_posix(params.amount);
             else{
-                printf("Quontity of signal must be more 0\n");
+                printf("Quontity of signal must be more 0 \n");
                 exit(EXIT_FAILURE);
             }
             break;
@@ -130,27 +155,4 @@ void worksignals(){
             mode_pipe();
             break;            
     }
-}
-
-
-
-
-void mode_std(){    
-    
-}
-
-void mode_child(){
-    
-}
-
-void mode_posix(int amount){
-    
-}
-
-void mode_kill(int signo, int validkillpid){
-    
-}
-
-void mode_pipe(){
-    
 }
