@@ -1,32 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <signal.h>
-#include <unistd.h>
-#include <getopt.h>
-
-void worksignalss(void);
-
-void mode_std(void);
-void mode_child(void);
-void mode_posix(int amount);
-void mode_kill(int signo, int validkillpid);
-void mode_pipe(void);
-
-enum Modes {
-        modes_std = 0,
-        modes_child,
-        modes_posix,
-        modes_kill,
-        modes_pipe
-}modes_e;
-
-struct Params {
-        enum Modes modes_e;
-        int amount;
-        int signalname;
-        int pid;
-}params;
+#include <general.h>
 
 int main(int argc, char** argv) {
 
