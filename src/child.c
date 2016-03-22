@@ -19,19 +19,13 @@ void handler_child_mode(int signum, siginfo_t *info, void *f){
 }
 
 void mode_child(){
-        struct sigaction std_s;
-        std_s.sa_sigaction = handler_std_mode;
-        std_s.sa_flags = SA_SIGINFO;
-        if(sigaction(SIGUSR1, &std_s, 0 == -1)){
-                perror(NULL);
-                exit(1);
-        }
-        if(sigaction(SIGUSR2, &std_s, 0) == -1){
-                perror(NULL);
-                exit(1);
-        }
-        if(sigaction(SIGHUP, &std_s, 0) == -1){
-                perror(NULL);
-                exit(1);
-        }
+        struct sigaction child_s;
+        child_s.sa_sigaction = handler_child_mode;
+        child_s.sa_flags = SA_SIGINFO;
+        if(sigaction(SIGCHLD, &std_s, 0) == -1) {
+		perror(NULL);
+		exit(1);
+	}
+	pid_t child_pid = fork();
+	
 }
