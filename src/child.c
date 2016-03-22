@@ -23,18 +23,20 @@ void mode_child(){
         int randomtime = 0;
         child_s.sa_sigaction = handler_child_mode;
         child_s.sa_flags = SA_SIGINFO;
-        if(sigaction(SIGCHLD, &child_s, 0) == -1) {
-		perror(NULL);
-		exit(1);
-	}
 	pid_t child_pid = fork();
+	
 	if(0 == child_pid) {
 		srand(time(0));
-		randomtime = rand()%5+1;
+		randomtime = 1+rand()%5;
 		printf("CHILD, Sleep for %d", randomtime);
 		sleep(randomtime);
-	} else if(0 > child_pid) {
+	} else if(0 < child_pid) {
+		if(sigaction(SIGCHLD, &child_s, 0) == -1) {
+			perror(NULL);
+			exit(1);
+		}
 		perror(NULL);
 		exit(1);
 	}
+
 }
