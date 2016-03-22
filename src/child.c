@@ -15,7 +15,7 @@ void handler_child_mode(int signum, siginfo_t *info, void *f){
         printf("Адрес в памяти, приводящий к ошибке: %d\n", info->si_addr);
         printf("Общее событие: %d\n", info->si_band);
         printf("Описатель файла: %d\n\n", info->si_fd);
-        return;
+        exit(0);
 }
 
 void mode_child(){
@@ -30,11 +30,9 @@ void mode_child(){
 	pid_t child_pid = fork();
 	if(0 == child_pid) {
 		srand(time(0));
-		randomtime = sleep(1+rand()%5);
-		printf("Sleep for %d",randomtime);
+		printf("CHILD, Sleep for %d", sleep(rand()%5+1);
 	} else if(0 > child_pid) {
 		perror(NULL);
 		exit(1);
 	}
-	
 }
