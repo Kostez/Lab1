@@ -9,7 +9,7 @@ void mode_std(){
         struct sigaction std_s;
         std_s.sa_sigaction = handler_std_mode;
         std_s.sa_flags = SA_SIGINFO;
-        if(sigaction(SIGUSR1, &std_s, 0 == -1)){
+        if(sigaction(SIGUSR1, &std_s, 0) == -1){
                 perror(NULL);
                 exit(1);
         }
