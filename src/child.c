@@ -37,20 +37,16 @@ void mode_child(){
         	 	break;
   		case 0:
         		printf(" CHILD: Это процесс-потомок!\n");
-          		printf(" CHILD: Мой PID -- %d\n", getpid());
-          		printf(" CHILD: PID моего родителя -- %d\n", getppid());
           		srand(time(0));
 			randomtime = 1+rand()%5;
 			printf("CHILD, Sleep for %d", randomtime);
 			sleep(randomtime);
           		printf(" CHILD: Проснулся!\n");
-          		exit(1);
+          		break;
+          		//exit(1);
+          		
   		default:
           		printf("PARENT: Это процесс-родитель!\n");
-        		printf("PARENT: Мой PID -- %d\n", getpid());
-          		printf("PARENT: PID моего потомка %d\n",child_pid);
-          		printf("PARENT: Я жду, пока потомок не вызовет exit()...\n");
-          		printf("PARENT: Выход!\n");
           		break;
   	}
 }
