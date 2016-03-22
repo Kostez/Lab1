@@ -4,7 +4,7 @@ int signal_c = 0;
 
 void handler_posix_mode(int signum, siginfo_t *info, void *f){
         fprintf(stderr, "PARENT: N=%i | MYPID=%i | PARENTPID=%i | RANDOMPOSIXSIGNALSENTNO=%i | RANDOMVALUE=%i\n", 
-			signal_c, info->si_pid, getpid(), signum, f->si_value.sival_int);
+			signal_c, info->si_pid, getpid(), signum, info->si_value.sival_int);
         signal_c++;
 }
 
