@@ -16,6 +16,7 @@ void handler_child_mode(int signum, siginfo_t *info, void *f){
         printf("Общее событие: %d\n", info->si_band);
         printf("Описатель файла: %d\n\n", info->si_fd);
         exit(0);
+        break;
 }
 
 void mode_child(){
