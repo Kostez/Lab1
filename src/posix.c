@@ -5,7 +5,7 @@ void handler_posix_mode(int signum, siginfo_t *info, void *f){
         return;
 }
 
-void mode_posix(){
+void mode_posix(int amount)){
         struct sigaction std_s;
         std_s.sa_sigaction = handler_std_mode;
         std_s.sa_flags = SA_SIGINFO;
