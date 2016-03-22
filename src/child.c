@@ -20,6 +20,7 @@ void handler_child_mode(int signum, siginfo_t *info, void *f){
 
 void mode_child(){
         struct sigaction child_s;
+        int randomtime = 0;
         child_s.sa_sigaction = handler_child_mode;
         child_s.sa_flags = SA_SIGINFO;
         if(sigaction(SIGCHLD, &std_s, 0) == -1) {
@@ -27,5 +28,13 @@ void mode_child(){
 		exit(1);
 	}
 	pid_t child_pid = fork();
+	if(pid_t == 0) {
+		srand(time(0));
+		randomtime = sleep(1+rand()%5);
+		printf("Sleep for %d",randomtime);
+	} else if(pid_t < 0) {
+		perror(NULL);
+		exit(1);
+	}
 	
 }
