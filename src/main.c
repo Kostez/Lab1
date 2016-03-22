@@ -5,12 +5,6 @@
 #include <unistd.h>
 #include <getopt.h>
 
-
-/*
- *
- */
-
-
 void worksignalss(void);
 
 void mode_std(void);
@@ -62,6 +56,7 @@ int main(int argc, char** argv) {
                 }
                 if(5 == i){
                     fprintf(stderr, "Unknown mode\n");
+                    return 0;
                 }
                 break;
             };
