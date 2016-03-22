@@ -67,18 +67,6 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void mode_posix(int amount){
-
-}
-
-void mode_kill(int signo, int validkillpid){
-
-}
-
-void mode_pipe(){
-
-}
-
 void worksignalss(){
     switch(params.modes_e){
         case 0:
