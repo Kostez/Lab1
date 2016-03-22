@@ -28,11 +28,11 @@ void mode_child(){
 		exit(1);
 	}
 	pid_t child_pid = fork();
-	if(pid_t == 0) {
+	if(0 == child_pid) {
 		srand(time(0));
 		randomtime = sleep(1+rand()%5);
 		printf("Sleep for %d",randomtime);
-	} else if(pid_t < 0) {
+	} else if(0 > child_pid) {
 		perror(NULL);
 		exit(1);
 	}
