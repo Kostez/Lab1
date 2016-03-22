@@ -3,10 +3,9 @@
 int signal_c = 0;
 
 void handler_posix_mode(int signum, siginfo_t *info, void *f){
-        
-        fprintf(stderr, " %i | %i | %i | %i | %i\n", signal_c, info->si_pid, getpgid(), signal, );
+        fprintf(stderr, "PARENT: N=%i | MYPID=%i | PARENTPID=%i | RANDOMPOSIXSIGNALSENTNO=%i | RANDOMVALUE=%i\n", 
+			signal_c, info->si_pid, getpid(), signum, f->si_value.sival_int);
         signal_c++;
-        return;
 }
 
 void mode_posix(int amount){
@@ -28,23 +27,23 @@ void mode_posix(int amount){
 		case -1:
 			break;
 		case 0:
+			int j = 0;
+			for(;j<amount;j++) {
+				union sigval value;
+				int randomsignal = 0;
+				int randomvalue = 0;
+			
+				srand(time(0));
+				randomsignal = SIGRTMIN+rand()%SIGRTMAX;
+				randomvalue = 50+rand()%100;
+			
+				sigqueue(getppid(), randomsignal, value);
+				fprintf(stderr, "CHILD: N=%i | MYPID=%i | PPID=%i | RANDOMPOSIXSIGNALSENTNO=%i | RANDOMVALUE=%i\n", 
+					i, getpid(), getppid(), randomsignal, value.sival_int);
+			};
 			break;
 		default:
+			printf("PARENT: PID=%d, GID=%d\n", getpid(), getpgid(getpid()));
 			break;
-	}
-	if (pid == 0) {
-		int j = 0;
-		for(;j<amount;j++) {
-			union sigval value;
-			int randomsignal = 0;
-			int randomvalue = 0;
-			
-			srand(time(0));
-			randomsignal = SIGRTMIN+rand()%SIGRTMAX;
-			randomvalue = 50+rand()%100;
-			
-			sigqueue(getppid(), randomsignal, value);
-		};	
-			
 	}
 }
