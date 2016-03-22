@@ -31,13 +31,10 @@ void mode_child(){
 		printf("CHILD, Sleep for %d", randomtime);
 		sleep(randomtime);
 	} else if(0 < child_pid) {
-		printf("Parent");
 		if(sigaction(SIGCHLD, &child_s, 0) == -1) {
 			perror(NULL);
 			exit(1);
 		}
 		perror(NULL);
-		exit(1);
 	}
-
 }
