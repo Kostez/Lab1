@@ -11,7 +11,7 @@ void handler_posix_mode(int signum, siginfo_t *info, void *f){
 void mode_posix(int amount) {
 	struct sigaction sa;
 	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = &handle_queue;
+	sa.sa_sigaction = &handler_posix_mode;
 
 	sigset_t set;
 	//sigfillset(&set);
