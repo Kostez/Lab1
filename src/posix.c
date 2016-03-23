@@ -23,11 +23,12 @@ void mode_posix(int amount){
 	
 	pid_t pid;
 	
+	int j;
 	switch(pid = fork()){
 		case -1:
 			break;
 		case 0:
-			int j = 0;
+			j = 0;
 			for(;j<amount;j++) {
 				union sigval value;
 				int randomsignal = 0;
