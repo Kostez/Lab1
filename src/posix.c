@@ -13,6 +13,8 @@ void mode_posix(int amount){
 	posix_s.sa_sigaction = handler_posix_mode;
 	posix_s.sa_flags = SA_SIGINFO;
 	
+	int diapozon = SIGRTMAX - SIGRTMIN;
+	
 	int i = SIGRTMIN;
 	for (; i < SIGRTMAX; i++) {
     		(sigaction(i, &posix_s, NULL) == -1);
@@ -25,14 +27,14 @@ void mode_posix(int amount){
 		case -1:
 			break;
 		case 0:
+			union sigval value;
+			int randomsignal=0;
 			j = 0;
 			for(;j<amount;j++) {
-				union sigval value;
-			
 				srand(time(0));
-				int randomsignal = SIGRTMIN+rand()%SIGRTMAX;
-				int randomvalue = 50+rand()%100;
-			
+				randomsignal = SIGRTMIN+rand()%diapozon;
+				value.sival_int = rand()%100;
+				
 				sigqueue(getppid(), randomsignal, value);
 				fprintf(stderr, "CHILD: N=%i | MYPID=%i | PPID=%i | RANDOMPOSIXSIGNALSENTNO=%i | RANDOMVALUE=%i\n", 
 					j, getpid(), getppid(), randomsignal, value.sival_int);
