@@ -33,7 +33,7 @@ void mode_posix(int amount){
 			for(j = 0;j<amount;j++) {
 				srand(time(0));
 				randomsignal = SIGRTMIN+rand()%diapozon;
-				val.sival_int = rand()%100;
+				val.sival_int = 1+rand()%1000;
 				sigqueue(getppid(), randomsignal, val);
 				fprintf(stderr, "CHILD: N=%i | MYPID=%i | PPID=%i | RANDOMPOSIXSIGNALSENTNO=%i | RANDOMVALUE=%i\n", 
 					j, getpid(), getppid(), randomsignal, val.sival_int);
