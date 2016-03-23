@@ -1,5 +1,12 @@
 #include <general.h>
 
+pid_t child;
+pid_t parent;
+struct list *first;
+struct list *last;
+
+struct sigaction sa;
+
 int signal_c = 0;
 
 int resieved_signals_count = 0;
