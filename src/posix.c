@@ -27,7 +27,8 @@ void mode_posix(int amount){
 		case -1:
 			break;
 		case 0:
-			for(int j = 0;j<amount;j++) {
+			int j = 0;
+			for(;j<amount;j++) {
 				union sigval value;
 				int randomsignal = 0;
 				int randomvalue = 0;
