@@ -34,7 +34,7 @@ struct sigaction sa;
 		int buckets = RAND_MAX / range;
 		int limit = buckets * range;
 
-		for (i = 0; i < amount_of_signals; ++i) {
+		for (i = 0; i < amount; ++i) {
 			union sigval value;
 
 			int r_signal;
