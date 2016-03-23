@@ -15,10 +15,7 @@ void mode_posix(int amount){
 	
 	int i = SIGRTMIN;
 	for (; i < SIGRTMAX; i++) {
-    		if(sigaction(i, &posix_s, NULL) == -1) {
-    			perror(NULL);
-			exit(0);
-    		}
+    		(sigaction(i, &posix_s, NULL) == -1);
 	}
 	
 	pid_t pid;
