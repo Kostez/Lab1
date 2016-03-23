@@ -29,8 +29,8 @@ void mode_posix(int amount){
 		case 0:
 			union sigval val;
 			int randomsignal=0;
-			j = 0;
-			for(;j<amount;j++) {
+			
+			for(j = 0;;j<amount;j++) {
 				srand(time(0));
 				randomsignal = SIGRTMIN+rand()%diapozon;
 				val.sival_int = rand()%100;
