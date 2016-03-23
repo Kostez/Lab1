@@ -2,13 +2,9 @@
 
 int signal_c = 0;
 
-void handler_posix_mode(int signum, siginfo_t *info, void *f){
-        fprintf(stderr, "PARENT: N=%i | MYPID=%i | PARENTPID=%i | RANDOMPOSIXSIGNALSENTNO=%i | RANDOMVALUE=%i\n", 
-			signal_c, info->si_pid, getpid(), signum, info->si_value.sival_int);
-        signal_c++;
-}
+int resieved_signals_count = 0;
 
-void mode_posix(int amount) {
+void mode_posix(int amount_of_signals) {
 	struct sigaction sa;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = &handler_posix_mode;
@@ -34,7 +30,7 @@ void mode_posix(int amount) {
 		int buckets = RAND_MAX / range;
 		int limit = buckets * range;
 
-		for (i = 0; i < amount; ++i) {
+		for (i = 0; i < amount_of_signals; ++i) {
 			union sigval value;
 
 			int r_signal;
@@ -67,38 +63,11 @@ void mode_posix(int amount) {
 		}
 	}
 }
-	struct sigaction posix_s;
-	posix_s.sa_sigaction = handler_posix_mode;
-	posix_s.sa_flags = SA_SIGINFO;
-	
-	int diapozon = SIGRTMAX - SIGRTMIN;
-	
-	int i = SIGRTMIN;
-	for (; i < SIGRTMAX; i++) {
-    		(sigaction(i, &posix_s, NULL) == -1);
-	}
-	
-	pid_t pid;
-	
-	int j;
-	switch(pid = fork()){
-		case -1:;
-			break;
-		case 0:;
-			union sigval val;
-			int randomsignal=0;
-			
-			for(j = 0;j<amount;j++) {
-				srand(time(0));
-				randomsignal = SIGRTMIN+rand()%diapozon;
-				val.sival_int = 1+rand()%1000;
-				sigqueue(getppid(), randomsignal, val);
-				fprintf(stderr, "CHILD: N=%i | MYPID=%i | PARENTPID=%i | RANDOMPOSIXSIGNALSENTNO=%i | RANDOMVALUE=%i\n", 
-					j, getpid(), getppid(), randomsignal, val.sival_int);
-			};
-			break;
-		default:;
-			printf("PARENT: PID=%d, GID=%d\n", getpid(), getpgid(getpid()));
-			break;
-	}
+
+void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
+	const char *signal_name;
+
+	fprintf(stderr, "PARENT: N=%i | MYPID=%i | PPID=%i | POSIXSIGNALNO=%i | VALUE=%i\n", 
+		resieved_signals_count, siginfo->si_pid, getpid(), signal, siginfo->si_value.sival_int);
+	resieved_signals_count++;
 }
