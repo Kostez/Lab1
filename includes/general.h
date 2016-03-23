@@ -24,6 +24,11 @@ struct Params {
         int pid;
 }params;
 
+struct list {
+	siginfo_t siginfo;
+	struct list *next;
+};
+
 void worksignalss(void);
 
 void mode_std(void);
