@@ -24,9 +24,9 @@ void mode_posix(int amount){
 	
 	int j;
 	switch(pid = fork()){
-		case -1:
+		case -1:;
 			break;
-		case 0:
+		case 0:;
 			union sigval val;
 			int randomsignal=0;
 			
@@ -40,7 +40,7 @@ void mode_posix(int amount){
 					j, getpid(), getppid(), randomsignal, val.sival_int);
 			};
 			break;
-		default:
+		default:;
 			printf("PARENT: PID=%d, GID=%d\n", getpid(), getpgid(getpid()));
 			break;
 	}
