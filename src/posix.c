@@ -13,7 +13,8 @@ int resieved_signals_count = 0;
 
 void mode_posix(int amount_of_signals) {
 	sa.sa_sigaction = handler_posix_mode;
-			for(int i=SIGRTMIN; i<=SIGRTMAX; i++)
+			int i=SIGRTMIN
+			for(; i<=SIGRTMAX; i++)
 			{
 				if(sigaction(i, &sa, 0)==-1)
 				{
@@ -45,7 +46,8 @@ void mode_posix(int amount_of_signals) {
 					srand(time(0));
 					printf("[CHILD]\n");
 					printf("|  N  | MYPID | PARENT | SIGNO | VALUE |\n");
-					for(int i=0;i<cmd->amount;i++)
+					int i=0
+					for(;i<cmd->amount;i++)
 					{
 						qval1.sival_int = rand()%100;
 						signo = SIGRTMIN+rand()%diap;
