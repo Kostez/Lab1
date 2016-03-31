@@ -42,7 +42,7 @@ void mode_posix(int n_signals) {
 				i, getpid(), getppid(), r_signal, value.sival_int);
 		}
 	} else if(pid > 0) {
-		sleep(10);
+		sleep(1);
 		
 		int status;
 		if (wait(&status) > 0) {
