@@ -4,6 +4,10 @@ sigset_t mask;
 int signal_c=0;
 char str[30][40];
 int global_n_signals;
+int isexit = 0;
+int signal_end = 0;
+
+
 void mode_posix(int n_signals) {
 	global_n_signals = n_signals;
 	int i = 0;
@@ -82,6 +86,11 @@ void handler_posix_child(int signal, siginfo_t *siginfo, void *context){
 
 void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
 	
+	if(signal == SIGCHLD){
+		isexit = 1;
+		return;
+	}
+	
 	int i = signal_c++;
 	
 	sigprocmask(SIG_BLOCK, &mask, NULL);
@@ -89,7 +98,9 @@ void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
 	sprintf(str[i], "PARENT\t %i | %i | %i | %i | %i", i, getpid(), getppid(), signal, siginfo->si_value.sival_int);
 //	signal_c++;
 
-	if((signal_c>=global_n_signals)&&(signal ==SIGCHLD)){
+	signal_end++;
+
+	if((signal_end>=global_n_signals)){
 		handler_posix_child(signal, siginfo, context);
 		
 	}
