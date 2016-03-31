@@ -15,11 +15,6 @@ void mode_posix(int n_signals) {
 		}
 	}
 	
-	if(sigaction(SIGCHLD, &sa, 0)==-1) {
-		perror(NULL);
-		exit(EXIT_FAILURE);
-	}
-	
 	pid_t child;
 	int status;
 	switch(child = fork()) {
