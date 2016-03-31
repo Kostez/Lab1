@@ -7,11 +7,11 @@ void mode_posix(int n_signals) {
 	
 	int i = 0;
 	for(; i< 30*40; i++){
-		str[i] = ' ';
+		str[i][0] = ' ';
 	}
 	
 	for(; i< 30; i++){
-		str[i*40] = '\0';
+		str[i*40][0] = '\0';
 	}
 	
 	struct sigaction sa;
