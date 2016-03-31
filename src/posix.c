@@ -24,8 +24,8 @@ void mode_posix(int n_signals) {
 			exit(1);
 		case 0:
 			srand(time(0));
-			int i=0;
-			for(; i < n_signals; i++) {
+			int k=0;
+			for(; k < n_signals; k++) {
 				union sigval svalue;
 				int random_signal;
 				svalue.sival_int = rand()%100;
