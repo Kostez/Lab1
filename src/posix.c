@@ -60,7 +60,7 @@ void mode_posix(int n_signals) {
 }
 
 void handler_posix_child(int signal, siginfo_t *siginfo, void *context){
-		if(signal_end< global_n_signals){
+		if(signal_end< signal_c){
 			sleep(1);
 		}
 		printf("%d\n", signal_end);
@@ -79,7 +79,7 @@ void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
 	
 	if(signal == SIGCHLD){
 		isexit = 1;
-		if(signal_end>=global_n_signals){
+		if(signal_end>=signal_c){
 			handler_posix_child(signal, siginfo, context);
 		}
 		return;
@@ -91,7 +91,7 @@ void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
 
 	signal_end++;
 
-	if((signal_end>=global_n_signals)&&(isexit > 0)){
+	if((signal_end>=signal_c)&&(isexit > 0)){
 		handler_posix_child(signal, siginfo, context);
 		
 	}
