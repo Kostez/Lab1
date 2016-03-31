@@ -21,8 +21,7 @@ void mode_posix(int n_signals) {
 		case -1:
 			perror("Failed to handle child-zombie");
 			exit(1);
-		case 0:
-			printf("0: %d\n", pid);
+		case 0:{
 			srand(time(0));
 			int k=0;
 			for(; k < n_signals; k++) {
@@ -33,7 +32,7 @@ void mode_posix(int n_signals) {
 				sigqueue(getppid(),random_signal,svalue);
 				printf("CHILD: \t %i | %i | %i | %i | %i\n", k, getpid(), getppid(), random_signal, svalue.sival_int);
 			}
-			break;
+			break;}
 		default:
 			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
