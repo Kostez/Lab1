@@ -20,7 +20,7 @@ void mode_posix(int n_signals) {
 	switch(pid) {
 		case -1:
 		{
-			perror("Failed to handle child-zombie");
+			perror("fork err");
 			exit(1);
 		};
 		case 0:
