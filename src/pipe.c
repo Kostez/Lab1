@@ -50,10 +50,11 @@ void mode_pipe(){
 				perror("close fd[0] err\n");
 				exit(EXIT_FAILURE);
 			}
-			if(write(fd[1],mystring,256)==-1) {
+			while(1) {
+				if(write(fd[1],mystring,256)==-1) {
 					perror("write err\n");
 					exit(1);
-				
+				}
 			}
 			break;
 		};
