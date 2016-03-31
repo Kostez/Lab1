@@ -92,7 +92,7 @@ void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
 	signal_end++;
 
 	if((signal_end>=global_n_signals)&&(isexit > 0)){
-//		handler_posix_child(signal, siginfo, context);
+		handler_posix_child(signal, siginfo, context);
 		
 	}
 }
