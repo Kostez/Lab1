@@ -1,7 +1,7 @@
 #include <general.h>
 
 int signal_c = 0;
-
+int diapozon = SIGRTMAX-SIGRTMIN;
 void mode_posix(int n_signals) {
 	struct sigaction sa;
 	sa.sa_flags = SA_SIGINFO;
@@ -32,7 +32,7 @@ void mode_posix(int n_signals) {
 				union sigval svalue;
 				int random_signal;
 				svalue.sival_int = rand()%100;
-				random_signal = SIGRTMIN+rand()%(SIGRTMAX-1);
+				random_signal = SIGRTMIN+rand()%diapozon;
 				sigqueue(getppid(),random_signal,svalue);
 				printf("%d\n", random_signal);
 				fprintf(stderr,"CHILD: \t %i | %i | %i | %i | %i\n", k, getpid(), getppid(), random_signal, svalue.sival_int);
