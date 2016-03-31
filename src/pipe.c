@@ -39,7 +39,6 @@ void mode_pipe(){
 	} else if(pid==0) {
 		close(fd[1]);
 		close(fd[0]);
-		sleep(4);
 		exit(0);
 	} else {
 		if(close(fd[0])==-1) {
