@@ -21,7 +21,7 @@ void mode_kill(int signo, int validkillpid){
  		
  		if (kill(validkillpid, signo) == -1){
  			perror("kill err\n"); 
- 			exit(1)); 
+ 			exit(1); 
  		} 
  		
  		exit(0); 
