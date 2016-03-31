@@ -19,7 +19,7 @@ void mode_posix(int n_signals) {
 	pid_t pid = fork();
 	switch(pid) {
 		case -1:
-			perror("fork");
+			perror("Failed to handle child-zombie");
 			exit(1);
 		case 0:
 			printf("0: %d\n", pid);
@@ -35,9 +35,6 @@ void mode_posix(int n_signals) {
 			}
 			break;
 		default:
-			
-			if (wait(&status) > 0) {
-				exit( EXIT_SUCCESS );
 			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
 			}
