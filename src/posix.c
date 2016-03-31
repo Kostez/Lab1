@@ -15,6 +15,7 @@ void mode_posix(int n_signals) {
 		}
 	}
 	
+	
 	pid_t child;
 	int status;
 	switch(child = fork()) {
