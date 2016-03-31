@@ -68,6 +68,8 @@ void handler_posix_child(int signal, siginfo_t *siginfo, void *context){
 }
 
 void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
-		fprintf(stderr,"PARENT\t %i | %i | %i | %i | %i\n", signal_c, getpid(), getppid(), signal, siginfo->si_value.sival_int);
-		signal_c++;
+	sigprocmask(SIG_BLOCK, &mask, NULL);
+	fprintf(stderr,"PARENT\t %i | %i | %i | %i | %i\n", signal_c, getpid(), getppid(), signal, siginfo->si_value.sival_int);
+	signal_c++;
+	sigprocmask(SIG_UNBLOCK, &mask, NULL);
 }
