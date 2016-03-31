@@ -17,7 +17,8 @@ void mode_posix(int n_signals) {
 	}
 	
 	int status;
-	switch(fork()) {
+	pid_t pid = fork();
+	switch(pid) {
 		case -1:
 			perror("fork");
 			exit(1);
@@ -30,7 +31,7 @@ void mode_posix(int n_signals) {
 				svalue.sival_int = rand()%100;
 				random_signal = SIGRTMIN+rand()%(SIGRTMAX-1);
 				sigqueue(getppid(),random_signal,svalue);
-				printf("CHILD: \t %i | %i | %i | %i | %i\n", i, getpid(), getppid(), random_signal, svalue.sival_int);
+				printf("CHILD: \t %i | %i | %i | %i | %i\n", k, getpid(), getppid(), random_signal, svalue.sival_int);
 			}
 			break;
 		default:
