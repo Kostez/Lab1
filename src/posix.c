@@ -14,6 +14,7 @@ void mode_posix(int n_signals) {
 		}
 	}
 	
+	pid_t child;
 	switch(child = fork()) {
 		case -1:
 			perror("fork"); /* произошла ошибка */
