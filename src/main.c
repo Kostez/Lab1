@@ -1,8 +1,5 @@
-#include <general.h>		
- 		
-void mode_pipe(){		
- 		
-}
+#include <general.h>
+
 int main(int argc, char** argv) {
 
     const char* short_options = "m:a::s::p::";
