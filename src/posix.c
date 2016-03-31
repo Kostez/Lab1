@@ -3,7 +3,6 @@
 int signal_c = 0;
 
 void mode_posix(int n_signals) {
-	printf("В mode_posix\n");
 	struct sigaction sa;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_posix_mode;
@@ -16,9 +15,8 @@ void mode_posix(int n_signals) {
 		}
 	}
 	
-	int status;
+	
 	pid_t pid = fork();
-	printf("%d\n", pid);
 	switch(pid) {
 		case -1:
 			perror("fork");
@@ -37,7 +35,9 @@ void mode_posix(int n_signals) {
 			}
 			break;
 		default:
-			sleep(10);
+			
+			if (wait(&status) > 0) {
+				exit( EXIT_SUCCESS );
 			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
 			}
