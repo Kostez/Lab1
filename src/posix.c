@@ -69,10 +69,10 @@ void mode_posix(int n_signals) {
 }
 
 void handler_posix_child(int signal, siginfo_t *siginfo, void *context){
-		if(signal_c< global_n_signals){
+		if(signal_end< global_n_signals){
 			sleep(1);
 		}
-		printf("%d\n", signal_c);
+		printf("%d\n", signal_end);
 		int i=0;
 		for(;i<signal_c;i++){
 			printf("%s\n", str[i]);
