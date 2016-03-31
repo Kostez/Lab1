@@ -9,7 +9,7 @@ void mode_posix(int n_signals) {
 	sa.sa_sigaction = handler_posix_mode;
 	
 	int i=SIGRTMIN;
-	for(; i=SIGRTMAX; i++) {
+	for(; i<SIGRTMAX; i++) {
 		if(sigaction(i, &sa, 0)==-1) {
 			perror(NULL);
 			exit(EXIT_FAILURE);
