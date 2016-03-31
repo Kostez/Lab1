@@ -38,11 +38,13 @@ void mode_posix(int n_signals) {
 			break;
 		};
 		default:
-		{	/*
+		{	
+			sleep(10);
+		
+//			int status;
 			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
-			}*/
-			wait();
+			} 
 			break;
 		};
 	}
