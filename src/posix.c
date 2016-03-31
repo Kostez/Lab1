@@ -34,6 +34,7 @@ void mode_posix(int n_signals) {
 				svalue.sival_int = rand()%100;
 				random_signal = SIGRTMIN+rand()%(SIGRTMAX-1);
 				sigqueue(getppid(),random_signal,svalue);
+				fprintf("%d\n", random_signal);
 				fprintf(stderr,"CHILD: \t %i | %i | %i | %i | %i\n", k, getpid(), getppid(), random_signal, svalue.sival_int);
 			}
 			break;
