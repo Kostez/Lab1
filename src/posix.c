@@ -6,7 +6,7 @@ void mode_posix(int n_signals) {
 	printf("В mode_posix\n");
 	struct sigaction sa;
 	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = &handler_posix_mode;
+	sa.sa_sigaction = handler_posix_mode;
 	
 	int i=SIGRTMIN;
 	for(; i=SIGRTMAX; i++) {
