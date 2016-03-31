@@ -16,9 +16,8 @@ void mode_posix(int n_signals) {
 		}
 	}
 	
-	pid_t childt;
 	int status;
-	switch(childt = fork()) {
+	switch(fork()) {
 		case -1:
 			perror("fork");
 			exit(1);
