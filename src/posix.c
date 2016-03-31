@@ -33,9 +33,9 @@ void mode_posix(int n_signals) {
 	
 	saChild.sa_mask = mask;
 	
-	sigprocmask(SIG_BLOCK, &mask, NULL);
-	
 	sigaction(SIGCHLD, &saChild, 0);
+	
+	sigprocmask(SIG_BLOCK, &mask, NULL);
 	
 	int diapozon = SIGRTMAX-SIGRTMIN;
 	
