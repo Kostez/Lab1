@@ -74,6 +74,7 @@ void mode_posix(int n_signals) {
 void handler_posix_child(int signal, siginfo_t *siginfo, void *context){
 		
 		sleep(10);
+		printf("%d\n", signal_c);
 		int i=0;
 		for(;i<signal_c;i++){
 			printf("%s\n", str[i]);
