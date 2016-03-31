@@ -16,7 +16,7 @@ void mode_posix(int n_signals) {
 		}
 	}
 	
-	sigaction(SIGHCHLD, &sa, 0);
+	sigaction(SIGCHLD, &sa, 0);
 	
 	int diapozon = SIGRTMAX-SIGRTMIN;
 	
