@@ -25,7 +25,7 @@ void mode_posix(int n_signals) {
 		int buckets = RAND_MAX / range;
 		int limit = buckets * range;
 
-		for (i = 0; i < amount_of_signals; ++i) {
+		for (i = 0; i < n_signals; ++i) {
 			union sigval value;
 
 			int r_signal;
@@ -36,10 +36,6 @@ void mode_posix(int n_signals) {
 			r_signal = SIGRTMIN + (r_signal / buckets);
 
 			value.sival_int = rand();
-
-
-
-
 
 			sigqueue(getppid(), r_signal, value);
 			fprintf(stderr, "CHILD: N=%i | MYPID=%i | PPID=%i | POSIXSIGNALNO=%i | VALUE=%i\n", 
