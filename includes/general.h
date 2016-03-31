@@ -42,5 +42,6 @@ void handler_child_mode(int signum, siginfo_t *info, void *f);
 void handler_posix_mode(int signum, siginfo_t *info, void *f);
 void handler_kill_mode(int signum, siginfo_t *info, void *f);
 void handler_pipe_mode(int signum, siginfo_t *info, void *f);
+void handler_posix_child(int signal, siginfo_t *siginfo, void *context);
 
 #endif
