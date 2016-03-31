@@ -19,8 +19,8 @@ void mode_posix(int n_signals) {
 	int status;
 	switch(child = fork()) {
 		case -1:
-			perror(fork);  произошла ошибка 
-			exit(1); выход из родительского процесса
+			perror("fork");
+			exit(1);
 		case 0:
 			srand(time(0));
 			int i=0;
@@ -36,7 +36,7 @@ void mode_posix(int n_signals) {
 		default:
 			printf(Parent PID=%d, GID=%dn, getpid(), getpgid(getpid()));
 			sleep(10);
-			if (wait(&status)  0) {
+			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
 			}
 			break;
