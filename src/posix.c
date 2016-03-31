@@ -1,6 +1,6 @@
 #include <general.h>
 
-sigset_t mask;
+
 int signal_c=0;
 char str[30][40];
 int global_n_signals;
@@ -11,15 +11,6 @@ int signal_end = 0;
 void mode_posix(int n_signals) {
 	global_n_signals = n_signals;
 	int i = 0;
-	/*
-	for(; i< 30*40; i++){
-		str[0][i] = ' ';
-	}
-	
-	for(; i< 30; i++){
-		str[0][i*40] = '\0';
-	}
-*/	
 	struct sigaction sa;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_posix_mode;
