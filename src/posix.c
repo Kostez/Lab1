@@ -88,7 +88,7 @@ void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
 	
 	if(signal == SIGCHLD){
 		isexit = 1;
-		if(signal_end>=global_n_signal){
+		if(signal_end>=global_n_signals){
 			handler_posix_child(signal, siginfo, context);
 		}
 		return;
