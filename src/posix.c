@@ -17,11 +17,7 @@ void mode_posix(int n_signals) {
 	
 	int status;
 	pid_t pid = fork();
-	switch(pid) {
-		case -1:
-			perror("fork"); /* произошла ошибка */
-			exit(1); /*выход из родительского процесса*/
-		case 0:
+	if (pid == 0) {
 			srand(time(0));
 			int i=0;
 			for(; i < n_signals; i++) {
@@ -32,13 +28,14 @@ void mode_posix(int n_signals) {
 				sigqueue(getppid(),random_signal,svalue);
 				printf("CHILD:\t%i | %i | %i | %i | %i\n", i, getpid(), getppid(), random_signal, svalue.sival_int);
 			}
-			break;
-		default:
+	}  else if(pid > 0) {
 			printf("Parent: PID=%d, GID=%d\n", getpid(), getpgid(getpid()));
 			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
-			}
-			break;
+			} else {
+			perror("Failed to handle child-zombie");
+			exit( EXIT_FAILURE );
+		}
 	}
 }
 
