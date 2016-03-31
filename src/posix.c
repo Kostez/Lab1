@@ -17,12 +17,8 @@ void mode_posix(int n_signals) {
 	}
 */	
 	struct sigaction sa;
-	struct sigaction saChild;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_posix_mode;
-	
-	saChild.sa_flags = SA_SIGINFO;
-	saChild.sa_sigaction = handler_posix_child;
 	
 	i=SIGRTMIN;
 	for(; i<SIGRTMAX; i++) {
@@ -32,11 +28,7 @@ void mode_posix(int n_signals) {
 		}
 	}
 	
-	saChild.sa_mask = mask;
-	
-	sigaction(SIGCHLD, &saChild, 0);
-	
-	sigprocmask(SIG_BLOCK, &mask, NULL);
+	sigaction(SIGCHLD, &sa, 0);
 	
 	int diapozon = SIGRTMAX-SIGRTMIN;
 	
@@ -97,4 +89,7 @@ void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
 	sprintf(str[i], "PARENT\t %i | %i | %i | %i | %i", i, getpid(), getppid(), signal, siginfo->si_value.sival_int);
 //	signal_c++;
 
+	if(signal_c>=global_n_signals){
+		handler_posix_child(signal, siginfo, context);
+	}
 }
