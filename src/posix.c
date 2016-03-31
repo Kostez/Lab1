@@ -101,7 +101,7 @@ void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
 	itoa(siginfo->si_value.sival_int, &str[i][24], 10);
 	
 	sigprocmask(SIG_UNBLOCK, &mask, NULL);*/
-	sprintf(str[i], "PARENT\t %i | %i | %i | %i | %i\n", signal_c, getpid(), getppid(), signal, siginfo->si_value.sival_int);
+	sprintf(str[i], "PARENT\t %i | %i | %i | %i | %i\n", i, getpid(), getppid(), signal, siginfo->si_value.sival_int);
 //	signal_c++;
 
 }
