@@ -7,11 +7,11 @@ void mode_posix(int n_signals) {
 	
 	int i = 0;
 	for(; i< 30*40; i++){
-		str[i][0] = ' ';
+		str[0][i] = ' ';
 	}
 	
 	for(; i< 30; i++){
-		str[i*40][0] = '\0';
+		str[0][i*40] = '\0';
 	}
 	
 	struct sigaction sa;
@@ -22,7 +22,7 @@ void mode_posix(int n_signals) {
 	saChild.sa_flags = SA_SIGINFO;
 	saChild.sa_sigaction = handler_posix_mode;
 	
-	int i=SIGRTMIN;
+	i=SIGRTMIN;
 	for(; i<SIGRTMAX; i++) {
 		if(sigaction(i, &sa, 0)==-1) {
 			perror(NULL);
