@@ -1,7 +1,7 @@
 #include <general.h>
 
 int signal_c = 0;
-int diapozon = SIGRTMAX-SIGRTMIN;
+
 void mode_posix(int n_signals) {
 	struct sigaction sa;
 	sa.sa_flags = SA_SIGINFO;
@@ -15,7 +15,7 @@ void mode_posix(int n_signals) {
 			exit(EXIT_FAILURE);
 		}
 	}
-	
+	int diapozon = SIGRTMAX-SIGRTMIN;
 	int status;
 	pid_t pid = fork();
 	switch(pid) {
