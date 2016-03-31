@@ -35,7 +35,6 @@ void mode_posix(int n_signals) {
 			break;
 		default:
 			printf("Parent: PID=%d, GID=%d\n", getpid(), getpgid(getpid()));
-			sleep(10);
 			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
 			}
