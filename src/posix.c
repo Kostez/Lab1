@@ -4,6 +4,7 @@ int signal_c = 0;
 
 void mode_posix(int n_signals) {
 	struct sigaction sa;
+	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_posix_mode;
 	
 	int i=SIGRTMIN;
