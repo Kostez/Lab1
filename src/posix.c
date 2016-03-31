@@ -2,13 +2,18 @@
 
 sigset_t mask;
 int signal_c=0;
-char str[30][128];
+char str[30][40];
 void mode_posix(int n_signals) {
 	
 	int i = 0
-	for(; i< 30*128; i++){
+	for(; i< 30*40; i++){
 		str[i] = ' ';
 	}
+	
+	for(; i< 30; i++){
+		str[i*40] = '\0';
+	}
+	
 	struct sigaction sa;
 	struct sigaction saChild;
 	sa.sa_flags = SA_SIGINFO;
@@ -68,6 +73,11 @@ void mode_posix(int n_signals) {
 void handler_posix_child(int signal, siginfo_t *siginfo, void *context){
 		
 		sleep(10);
+		int i=0;
+		for(;i<signal_c;i++){
+			printf("%s\n", str[i]);
+		}
+		
 		int status = 0;
 		if (wait(&status) > 0) {
 			exit( EXIT_SUCCESS );
