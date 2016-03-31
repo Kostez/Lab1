@@ -3,7 +3,7 @@
 int signal_c = 0;
 
 void mode_posix(int n_signals) {
-	print("В mode_posix\n");
+	printf("В mode_posix\n");
 	struct sigaction sa;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_posix_mode;
