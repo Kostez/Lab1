@@ -1,6 +1,7 @@
 #include <general.h>
 
 sigset_t mask;
+int signal_c=0;
 
 void mode_posix(int n_signals) {
 	struct sigaction sa;
