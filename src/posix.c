@@ -43,6 +43,6 @@ void mode_posix(int n_signals) {
 }
 
 void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
-	printf("PARENT:\t %i | %i | %i | %i | %i\n", signal_c, siginfo->si_pid, getpid(), signal, siginfo->si_value.sival_int));
+	printf("PARENT:\t %i | %i | %i | %i | %i\n", signal_c, siginfo->si_pid, getpid(), signal, siginfo->si_value.sival_int);
 	signal_c++;
 }
