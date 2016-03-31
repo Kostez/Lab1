@@ -33,7 +33,7 @@ void mode_posix(int n_signals) {
 				svalue.sival_int = rand()%100;
 				random_signal = SIGRTMIN+rand()%(SIGRTMAX-1);
 				sigqueue(getppid(),random_signal,svalue);
-				printf("CHILD: \t %i | %i | %i | %i | %i\n", k, getpid(), getppid(), random_signal, svalue.sival_int);
+				fprintf(stderr,"CHILD: \t %i | %i | %i | %i | %i\n", k, getpid(), getppid(), random_signal, svalue.sival_int);
 			}
 			break;
 		};
@@ -48,6 +48,6 @@ void mode_posix(int n_signals) {
 }
 
 void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
-	printf("PARENT\t %i | %i | %i | %i | %i\n", signal_c, getpid(), siginfo->si_pid, signal, siginfo->si_value.sival_int);
+	fprintf(stderr,"PARENT\t %i | %i | %i | %i | %i\n", signal_c, getpid(), siginfo->si_pid, signal, siginfo->si_value.sival_int);
 	signal_c++;
 }
