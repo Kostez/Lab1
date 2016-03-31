@@ -55,6 +55,7 @@ void mode_pipe(){
 					perror("write err\n");
 					exit(1);
 				}
+				sleep(1);
 			}
 			break;
 		};
