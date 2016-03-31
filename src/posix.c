@@ -3,8 +3,9 @@
 sigset_t mask;
 int signal_c=0;
 char str[30][40];
+int global_n_signals;
 void mode_posix(int n_signals) {
-	
+	global_n_signals = n_signals;
 	int i = 0;
 	/*
 	for(; i< 30*40; i++){
@@ -72,8 +73,9 @@ void mode_posix(int n_signals) {
 }
 
 void handler_posix_child(int signal, siginfo_t *siginfo, void *context){
-		
-//		sleep(10);
+		if(signal_c< global_n_signals){
+			sleep(1);
+		}
 		printf("%d\n", signal_c);
 		int i=0;
 		for(;i<signal_c;i++){
@@ -91,17 +93,8 @@ void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
 	int i = signal_c++;
 	
 	sigprocmask(SIG_BLOCK, &mask, NULL);
-	
-	
-/*	
-	itoa(signal_c, &str[i][0], 10);
-	itoa(getpid(), &str[i][6], 10);
-	itoa(getppid(), &str[i][12], 10);
-	itoa(signal, &str[i][18], 10);
-	itoa(siginfo->si_value.sival_int, &str[i][24], 10);
-	
-	sigprocmask(SIG_UNBLOCK, &mask, NULL);*/
-	sprintf(str[i], "PARENT\t %i | %i | %i | %i | %i\n", i, getpid(), getppid(), signal, siginfo->si_value.sival_int);
+
+	sprintf(str[i], "PARENT\t %i | %i | %i | %i | %i", i, getpid(), getppid(), signal, siginfo->si_value.sival_int);
 //	signal_c++;
 
 }
