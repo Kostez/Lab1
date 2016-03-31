@@ -23,6 +23,7 @@ void mode_posix(int n_signals) {
 			perror("fork");
 			exit(1);
 		case 0:
+			printf("0: %d\n", pid);
 			srand(time(0));
 			int k=0;
 			for(; k < n_signals; k++) {
