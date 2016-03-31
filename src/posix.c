@@ -40,7 +40,6 @@ void mode_posix(int n_signals) {
 			sigqueue(getppid(), r_signal, value);
 			fprintf(stderr, "CHILD: N=%i | MYPID=%i | PPID=%i | POSIXSIGNALNO=%i | VALUE=%i\n", 
 				i, getpid(), getppid(), r_signal, value.sival_int);
-				sleep(1);
 		}
 	} else if(pid > 0) {
 		sleep(10);
