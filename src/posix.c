@@ -43,7 +43,6 @@ void mode_posix(int n_signals) {
 				sleep(1);
 		}
 	} else if(pid > 0) {
-		printf("Parent: PID=%d, GID=%d\n", getpid(), getpgid(getpid()));
 		sleep(10);
 		
 		int status;
