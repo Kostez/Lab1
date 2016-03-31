@@ -41,10 +41,6 @@ void mode_pipe(){
 		close(fd[0]);
 		exit(0);
 	} else {
-		if(close(fd[0])==-1) {
-			perror("close fd[0] err\n");
-			exit(1);
-		}
 		
 		while(1){
 			if(write(fd[1],mystring,256)==-1) {
