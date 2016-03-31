@@ -2,8 +2,6 @@
 
 int signal_c = 0;
 
-int resieved_signals_count = 0;
-
 void mode_posix(int n_signals) {
 	struct sigaction sa;
 	sa.sa_sigaction = handler_posix_mode;
@@ -29,7 +27,7 @@ void mode_posix(int n_signals) {
 				svalue.sival_int = rand()%100;
 				random_signal = SIGRTMIN+rand()%(SIGRTMAX-1);
 				sigqueue(parent,random_signal,svalue);
-				printf("CHILD:\t%i | %i | %i | %i |%i\n", i, getpid(), getppid(), random_signal, svalue.sival_int);
+				printf("CHILD:\t%i | %i | %i | %i | %i\n", i, getpid(), getppid(), random_signal, svalue.sival_int);
 			}
 		default:
 			int status;
@@ -40,9 +38,6 @@ void mode_posix(int n_signals) {
 }
 
 void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
-	if(signal==SIGCHLD){
-		printf("[PARENT]:\n");
-		printf("%5d|%7d|%7d|%7d|%7d|\n", ,parent,child,cur->siginfo.si_signo,cur->siginfo.si_value.sival_int);
-	}
-	return;
+	printf("PARENT:\t %i | %i | %i | %i | %i\n", signal_c, siginfo->si_pid, getpid(), signal, siginfo->si_value.sival_int);
+	signal_c++;
 }
