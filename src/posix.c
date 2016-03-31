@@ -5,7 +5,7 @@ int signal_c=0;
 char str[30][40];
 void mode_posix(int n_signals) {
 	
-	int i = 0
+	int i = 0;
 	for(; i< 30*40; i++){
 		str[i] = ' ';
 	}
