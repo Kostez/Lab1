@@ -1,5 +1,7 @@
 #include <general.h>
 
+sigset_t mask;
+
 void mode_posix(int n_signals) {
 	struct sigaction sa;
 	struct sigaction saChild;
@@ -17,7 +19,7 @@ void mode_posix(int n_signals) {
 		}
 	}
 	
-	sigset_t mask;
+	
 	sa.sa_mask = mask; 
 	
 	sigprocmask(SIG_BLOCK, &mask, NULL);
