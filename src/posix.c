@@ -18,6 +18,7 @@ void mode_posix(int n_signals) {
 	
 	int status;
 	pid_t pid = fork();
+	printf("%d\n", pid);
 	switch(pid) {
 		case -1:
 			perror("fork");
