@@ -15,6 +15,7 @@ void mode_posix(int n_signals) {
 	}
 	
 	pid_t child;
+	int status;
 	switch(child = fork()) {
 		case -1:
 			perror("fork"); /* произошла ошибка */
@@ -31,7 +32,7 @@ void mode_posix(int n_signals) {
 				printf("CHILD:\t%i | %i | %i | %i | %i\n", i, getpid(), getppid(), random_signal, svalue.sival_int);
 			}
 		default:
-			int status;
+			
 			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
 			}
