@@ -1,4 +1,4 @@
-#include general.h
+#include <general.h>
 
 int signal_c = 0;
 
@@ -15,9 +15,9 @@ void mode_posix(int n_signals) {
 		}
 	}
 	
-	pid_t child;
+	pid_t childt;
 	int status;
-	switch(child = fork()) {
+	switch(childt = fork()) {
 		case -1:
 			perror("fork");
 			exit(1);
