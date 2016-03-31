@@ -1,38 +1,58 @@
 #include <general.h>
 
-int signal_c = 0;
+int resieved_signals_count = 0;
 
 void mode_posix(int n_signals) {
 	struct sigaction sa;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_posix_mode;
 	
-	int i=SIGRTMIN;
-	for(; i<=SIGRTMAX; i++) {
-		if(sigaction(i, &sa, 0)==-1) {
-			perror(NULL);
-			exit(EXIT_FAILURE);
-		}
+	if(sigaction(SIGRTMIN, &sa, NULL) == -1){
+		perror("Ошибка: не удается обработать сигнал SIGRTMIN");
 	}
-	
-	int status;
+
+	int j = 0;
+	for (j = 0; j < SIGRTMAX; j++) {
+		sigaction(SIGRTMIN + j, &sa, NULL);
+	}
+
 	pid_t pid = fork();
 	if (pid == 0) {
-			srand(time(0));
-			int i=0;
-			for(; i < n_signals; i++) {
-				union sigval svalue;
-				int random_signal;
-				svalue.sival_int = rand();
-				random_signal = SIGRTMIN+rand()%(SIGRTMAX);
-				sigqueue(getppid(),random_signal,svalue);
-				printf("CHILD:\t%i | %i | %i | %i | %i\n", i, getpid(), getppid(), random_signal, svalue.sival_int);
-			}
-	}  else if(pid > 0) {
-			printf("Parent: PID=%d, GID=%d\n", getpid(), getpgid(getpid()));
-			if (wait(&status) > 0) {
-				exit( EXIT_SUCCESS );
-			} else {
+		// Child-процесс
+		int i = 0;
+
+		int range = 1 + SIGRTMAX - SIGRTMIN;
+		int buckets = RAND_MAX / range;
+		int limit = buckets * range;
+
+		for (i = 0; i < amount_of_signals; ++i) {
+			union sigval value;
+
+			int r_signal;
+			do {
+				r_signal = rand();
+			} while (r_signal >= limit);
+
+			r_signal = SIGRTMIN + (r_signal / buckets);
+
+			value.sival_int = rand();
+
+
+
+
+
+			sigqueue(getppid(), r_signal, value);
+			fprintf(stderr, "CHILD: N=%i | MYPID=%i | PPID=%i | POSIXSIGNALNO=%i | VALUE=%i\n", 
+				i, getpid(), getppid(), r_signal, value.sival_int);
+		}
+	} else if(pid > 0) {
+		printf("Parent: PID=%d, GID=%d\n", getpid(), getpgid(getpid()));
+		sleep(10);
+		
+		int status;
+		if (wait(&status) > 0) {
+			exit( EXIT_SUCCESS );
+		} else {
 			perror("Failed to handle child-zombie");
 			exit( EXIT_FAILURE );
 		}
@@ -40,6 +60,7 @@ void mode_posix(int n_signals) {
 }
 
 void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
-	printf("PARENT:\t %i | %i | %i | %i | %i\n", signal_c, siginfo->si_pid, getpid(), signal, siginfo->si_value.sival_int);
-	signal_c++;
+	fprintf(stderr, "PARENT: N=%i | MYPID=%i | PPID=%i | POSIXSIGNALNO=%i | VALUE=%i\n", 
+		resieved_signals_count, siginfo->si_pid, getpid(), signal, siginfo->si_value.sival_int);
+	resieved_signals_count++;
 }
