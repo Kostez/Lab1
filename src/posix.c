@@ -18,10 +18,10 @@ void mode_posix(int n_signals) {
 	struct sigaction sa;
 	struct sigaction saChild;
 	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = handler_posix_child;
+	sa.sa_sigaction = handler_posix_mode;
 	
 	saChild.sa_flags = SA_SIGINFO;
-	saChild.sa_sigaction = handler_posix_mode;
+	saChild.sa_sigaction = handler_posix_child;
 	
 	i=SIGRTMIN;
 	for(; i<SIGRTMAX; i++) {
