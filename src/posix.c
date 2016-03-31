@@ -33,10 +33,10 @@ void mode_posix(int n_signals) {
 				printf("CHILD:\t%i | %i | %i | %i | %i\n", i, getpid(), getppid(), random_signal, svalue.sival_int);
 			}
 			break;
-		default:
+		default:/*
 			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
-			}
+			}*/
 			break;
 	}
 }
