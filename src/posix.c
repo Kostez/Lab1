@@ -42,6 +42,7 @@ void mode_posix(int n_signals) {
 			if (wait(&status) > 0) {
 				exit( EXIT_SUCCESS );
 			}*/
+			wait();
 			break;
 		};
 	}
