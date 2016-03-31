@@ -15,8 +15,11 @@ void mode_posix(int n_signals) {
 			exit(EXIT_FAILURE);
 		}
 	}
+	
+	sigaction(SIGHCHLD, &sa, 0);
+	
 	int diapozon = SIGRTMAX-SIGRTMIN;
-	int status;
+	
 	pid_t pid = fork();
 	switch(pid) {
 		case -1:
@@ -41,16 +44,23 @@ void mode_posix(int n_signals) {
 		};
 		default:
 		{
-			status = 0;
-			if (wait(&status) > 0) {
-				exit( EXIT_SUCCESS );
-			} 
+			while(1){
+				sleep(10);
+			}
 			break;
 		};
 	}
 }
 
 void handler_posix_mode(int signal, siginfo_t *siginfo, void *context) {
-	fprintf(stderr,"PARENT\t %i | %i | %i | %i | %i\n", signal_c, getpid(), getppid(), signal, siginfo->si_value.sival_int);
-	signal_c++;
+	if(signal == SIGCHLD){
+		int status = 0;
+		if (wait(&status) > 0) {
+			exit( EXIT_SUCCESS );
+		} 
+	} else {
+		fprintf(stderr,"PARENT\t %i | %i | %i | %i | %i\n", signal_c, getpid(), getppid(), signal, siginfo->si_value.sival_int);
+		signal_c++;
+	}
 }
+
