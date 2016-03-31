@@ -33,31 +33,25 @@ void mode_pipe(){
 	}
 	
 	pid=fork();
-	switch(pid){
-		case -1:{
-			perror("case -1 err\n");
+	if(pid==-1){
+		perror("fork err"); 
+ 		exit(0);
+	} else if(pid==0) {
+		close(fd[1]);
+		close(fd[0]);
+		sleep(4);
+		exit(0);
+	} else {
+		if(close(fd[0])==-1) {
+			perror("close fd[0] err\n");
 			exit(1);
-			break;
-		};
-		case 0: {
-			close(fd[1]);
-			close(fd[0]);
-			sleep(4);
-			exit(0);
-		};
-		default: {
-			if(close(fd[0])==-1) {
-				perror("close fd[0] err\n");
-				exit(EXIT_FAILURE);
-			}
-			while(1) {
-				if(write(fd[1],mystring,256)==-1) {
-					perror("write err\n");
-					exit(1);
-				}
-				sleep(1);
-			}
-			break;
-		};
+		}
+		if(write(fd[1],mystring,256)==-1) {
+			perror("write err\n");
+			exit(1);
+		}
+		while(1){
+			sleep(10);
+		}
 	}
 }
